@@ -1,8 +1,8 @@
 import './css/styles.css';
 import debounce from 'lodash.debounce';
-// import artTempl from './template/articles.hbs';
-import fetchCountries from './fetch.js'
+import fetchCountries from './fetchCountries.js'
 import { Notify } from 'notiflix/build/notiflix-notify-aio'
+
 const DEBOUNCE_DELAY = 500;
 const START_URL = "https://restcountries.com/v2/name/";
 const inputEl = document.getElementById("search-box");
@@ -10,8 +10,9 @@ const listEl = document.querySelector("ul");
 const containerEl = document.querySelector(".country-info");
 const MAX_COUNTRIES = 10;
 let input = "";
-inputEl.addEventListener("input", debounce((ev) => {
-    input = ev.target.value.trim(" ");
+
+inputEl.addEventListener("input", debounce((e) => {
+    input = e.target.value.trim(" ");
     listEl.innerHTML = '';
     containerEl.innerHTML = "";
     if (!input) {
@@ -29,8 +30,6 @@ inputEl.addEventListener("input", debounce((ev) => {
         }
     }).catch();
 }, DEBOUNCE_DELAY));
-function addArticles(data) {
-}
 
 function markupCountries(items) {
     return items.map(item => `<li><img src="${item.flag}" alt="flag" width="40" height ="30">
